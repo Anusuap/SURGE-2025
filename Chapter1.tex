@@ -1,0 +1,512 @@
+\documentclass{article}
+\usepackage{graphicx}    % Required for inserting images
+\usepackage{amsmath}     % For better math formatting
+\usepackage{amssymb}     % For additional math symbols
+\usepackage{mathrsfs}    % For script letters like \mathscr
+\usepackage{amsfonts} % For symbols like \mathbb
+\usepackage{amsthm}
+
+\title{Chapter 3.1}
+\author{Anusua Paul}
+\date{June, 2025}
+
+\numberwithin{equation}{section}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\pp}{\mathbb{P}}
+
+\begin{document}
+
+\maketitle
+
+\section{Harmonic Functions and Dirichlet Problem }
+In this section we explore the relation between the Brownian Motion and Harmonic functions. This study will help us to explore the transience and recurrence property of Brownian motion for different dimensions and will provide us the answer to the fundamental Dirichlet problem of electrostatics. 
+
+\noindent Suppose \(U \) is a domain that is a connected open set \(U \subset \mathbb{R}^d\) and \(\partial{U}\) be it's boundary with closure \(\bar{U}\) which is homogeneous and boundary of which is electrically charged. The charge is given by a continuous function \(\varphi : \partial{U} \to \mathbb{R}\). In the Dirichlet problem we want to find the voltage \(u(x)\) at any \(x \in U\). By Kirchoff law \(u\) must be harmonic in \(U\). Now we start our discussion by defining Harmonic functions.
+
+\begin{definition}[{\cite[Definition 3.1]{PeresMortersBook}}]
+Suppose \(U \subset \mathbb{R}^d\) is a domain. A function \(u : U \to \mathbb{R}\) is called a \(\boldsymbol{Harmonic\ function}\) on \(U\) if it is twice continuously differentiable and for all \(x \in U\) satisfies the following equality \\
+\[
+\Delta u(x) = \sum_{i=1}^{d} \frac{\partial^2 u(x)}{\partial x_i^2} = 0
+\]
+If \(\Delta{u}(x) \geq 0\) then we call it a \(\boldsymbol{subharmonic\ function}\).
+\end{definition}
+\begin{theorem}[{\cite[Theorem 3.2]{PeresMortersBook}}]
+Suppose \(U \subset \mathbb{R}^d\) and \(u : U \to \mathbb{R}^d\) is a function which is measurable and locally bounded then the following statements are equivalent .
+\begin{enumerate}
+ \item u is harmonic .
+ \item for any \(\mathbb{B}(x,r)\subset U\)
+ \[
+u(x) = \frac{1}{\mathscr{L}(\mathbb{B}(x, r))} \int_{\mathbb{B}(x, r)} u(y) \, dy
+\]
+where \(\mathscr{L}(\mathbb{B}(x,r))\) is the d dimensional volume of the ball ( for \(d=1\) it is length, for \(d=2\) it is area, for \(d=3\) it is volume and so on ).
+ \item for any \(\mathbb{B}(x,r) \subset U\)
+\[
+u(x) = \frac{1}{\sigma_{x,r}(\partial \mathbb{B}(x, r))} \int_{\partial \mathbb{B}(x, r)} u(y) \, d\sigma_{x,r}(y)
+\]
+where \(\sigma_{x,r}(\partial \mathbb{B}(x, r))\) is the surface measure of the boundary of the ball (for \(d = 3\), it is the surface area of the 3-dimensional sphere).
+\end{enumerate}
+Note that this is referred to as mean value property .
+\end{theorem}
+\begin{remark}[{\cite[Remark 3.3]{PeresMortersBook}}]
+Green's identity:
+\[
+\int_{\partial \mathbb{B}(x, r)} \frac{\partial u}{\partial n}(y) \, d\sigma_{x,r}(y) = \int_{\mathbb{B}(x, r)} \Delta u(y) \, dy 
+\]
+where \( n(y) \) represents the unit outward normal vector to the boundary \( \partial \mathbb{B}(x, r) \) at the point \( y \).
+
+\end{remark}
+\begin{proof}
+First we prove \((2) \implies (3)\)\\
+Define \(\psi(r) : (0,\infty) \to \mathbb{R}\) such that 
+\[
+\psi(r) = r^{1 - d} \int_{\partial \mathbb{B}(x, r)} u(y) \, d\sigma_{x, r}(y)
+\]
+For any \(r >0\)
+
+
+\[
+r^d \, \mathscr{L}(\mathbb{B}(x,1)) \, u(x) = \mathscr{L}(\mathbb{B}(x,r)) \, u(x)
+\]
+
+Put \( d = 2 \)
+
+\[
+\text{Then } \mathscr{L}(\mathbb{B}(x,1)) = \pi
+\]
+\[
+\mathscr{L}(\mathbb{B}(x,r)) = \pi r^2
+\]
+
+The equality holds.
+
+Put \( d = 3 \)
+
+\[
+\text{Then } \mathscr{L}(\mathbb{B}(x,1)) = \frac{4}{3} \pi
+\]
+\[
+\mathscr{L}(\mathbb{B}(x,r)) = \frac{4}{3} \pi r^3
+\]
+
+So the equality holds.\\
+Proceeding this way we can show this for any dimension d .\\
+
+\noindent From (2) we have
+\[
+\mathscr{L}(\mathbb{B}(x,r))\,U(x) = \int_{\mathbb{B}(x,r)} U(y)\,dy = \int_0^r \psi(s)\,s^{d-1}\,ds
+\]
+
+\noindent Note that for \( d \geq 2 \), here \( x \) and \( y \) are \( d \)-dimensional vectors.  
+Let us try to prove this for \( d = 2 \).  
+Consider the following transformation, \( (y_1, y_2) \Rightarrow (s, \theta) \)
+
+\[
+\begin{aligned}
+    y_1 &= s \cos \theta \\
+    y_2 &= s \sin \theta
+\end{aligned}
+\quad \quad
+\begin{aligned}
+    0 \leq s \leq r \\
+    0 <\leq \theta \leq 2\pi
+\end{aligned}
+\]
+
+So we have
+\[
+\int_{\mathbb{B}(x,r)} U(y)\,dy = \int_{\mathbb{B}((x_1,x_2),r)} U(y_1,y_2)\,dy_1\,dy_2
+\]
+
+The Jacobian of the above transformation is \( s \), so
+
+\[
+= \int_0^{2\pi} \int_0^r U(s\cos\theta, s\sin\theta)\,s\,ds\,d\theta
+\]
+
+Let \( \vec{z} = (s\cos\theta, s\sin\theta) \), and define the surface measure on the boundary \( \partial \mathbb{B}(x,s) \) as \(\sigma_{x,s}(\vec{z}\) and \( d\sigma_{x,s}(\vec{z}) = s\,d\theta \). Then,
+
+\[
+= \int_0^r \left( \int_0^{2\pi s} U(\vec{z})\,d\sigma_{x,s}(\vec{z}) \right) ds\\
+=\int_0^r \psi(s) s ds
+\]
+\noindent So the equality holds for \(d = 2\).
+Proceeding this way we can show the below equality holds for any \(r > 0 \) and \(d \in \mathbb{N}\)
+\[
+r^d \, \mathscr{L}(\mathbb{B}(x,1)) \, u(x) = \int_0^r \psi(s)\,s^{d-1}\,ds
+\]
+Now differentiate both sides of the equality with respect to \( r \):
+\[
+d\, r^{d-1} \mathscr{L}(\mathbb{B}(x,1))\, u(x) = \psi(r)\, r^{d-1}
+\]
+
+Again we know,  
+\[
+d\, r^{d-1} \mathscr{L}(\mathbb{B}(x,1)) = \sigma_{x,r}(\partial \mathbb{B}(x, r))
+\]
+
+Put \( d = 2 \):  
+\[
+d\, r^{d-1} \mathscr{L}(\mathbb{B}(x,1)) = 2\pi,\quad \sigma_{x,r}(\partial \mathbb{B}(x, r)) = 2\pi
+\]
+\noindent Thus for \( d = 2 \), the equality holds and it can be shown that the equality will hold for any \( d \).
+
+Then,  
+\[
+\sigma_{x,r}(\partial \mathbb{B}(x, r))\, u(x) = \psi(r)\, r^{d-1}
+\]
+and hence,
+\[
+u(x) = \frac{1}{\sigma_{x,r}(\partial \mathbb{B}(x, r))} \int_{\partial \mathbb{B}(x,r)} u(y)\, d\sigma_{x,r}(y)
+\]
+where the last equality follows from the definition of $\psi(r)$. This completes the proof of \((2) \implies (3)\).
+
+
+\noindent Now we prove \( (3) \implies (2) \).\\
+From (2) we have  
+\[
+u(x)\, \sigma_{x,r}(\partial \mathbb{B}(x,r)) = \int_{\partial \mathbb{B}(x,r)} u(y)\, d\sigma_{x,r}(y)
+\]
+
+Fix \( s > 0 \).  
+Integrating both sides with respect to \(r\) where \(0 \leq r \leq s\), we get 
+\[
+u(x) \int_0^s \sigma_{x,r}(\partial \mathbb{B}(x,r))\, dr = \int_0^s \left( \int_{\partial \mathbb{B}(x,r)} u(y)\, d\sigma_{x,r}(y) \right) dr
+\]
+
+Now from the previous proof 
+\[
+\int_0^s\left(\int_{\partial \mathbb{B}(x,r)}u(y)\, d\sigma_{x,r}(y)\right)dr = \int_{\mathbb{B}(x,r)} u(y)\, dy
+\]
+
+For \( d = 2 \), we have:
+\[
+\int_0^s\int_{\partial \mathbb{B}(x,r)} u(y)\, d\sigma_{x,r}(y)\, dr = \int_0^s \int_0^{2\pi r} u(y)\, d\sigma_{x,r}(y)\, dr = \int_{\mathbb{B}(x,s)}u(y)\, dy
+\]
+
+Thus, it can be shown for any dimension \( d \).\\
+
+Also,
+\[
+\int_0^s \sigma_{x,r}(\partial \mathbb{B}(x,r))\, dr = \mathscr{L}(\mathbb{B}(x,s))
+\]
+So the equality of (2) is proved.
+
+\noindent Now we show, (3) \(\implies\) (1). Using convolution we can show that \( u \) is infinitely often differentiable in \( U \). Now suppose \( \Delta u \ne 0 \), so \( \exists \, \mathbb{B}(x, \varepsilon) \subset U \) such that \( \Delta u(x) > 0 \) on the ball or \( \Delta u(x) < 0 \) on the ball then 
+using the previous notations.
+
+\[
+\psi(r) = d\mathscr{L}(\mathbb{B}(x,1)) \, u(x)
+\]
+and hence differentiating this w.r.t. \( r \)
+\[
+0 = \psi'(r) = r^{1-d} \int_{\partial \mathbb{B}(x,r)} \frac{\partial u}{\partial n}(y) \, d\sigma_{x,r}(y)
+= r^{1-d} \int_{\mathbb{B}(x,r)} \Delta u(y) \, dy
+\]
+\noindent which is a contradiction to the fact that 
+on the ball \( \mathbb{B}(x,r) \) either \( \Delta u(x) > 0 \) or 
+\( \Delta u(x) < 0 \). So \( \Delta u(x) = 0 \), implying the harmonicity.
+
+\noindent Finally we are to show,\(
+(1) \Rightarrow (3)
+\). 
+\noindent  Given \( u \) is harmonic and \( \mathbb{B}(x, r) \subset U \) \\
+Then using Green's identity we have,
+
+\[
+\psi'(r) = r^{1-d} \int_{\partial \mathbb{B}(x,r)} \frac{\partial u}{\partial n}(y) \, d\sigma_{x,r}(y) = r^{1-d} \int_{\mathbb{B}(x,r)} \Delta u(y) \, dy = 0
+\]
+\noindent so \( \psi(r) \) is constant in \( r \). \\
+As \( u(x) \) is harmonic so it is continuous in the domain thus when \( r > 0 \) is very small \( \Rightarrow \exists \varepsilon >0 \) such that
+\[
+|u(x) - u(y)| < \varepsilon \quad \text{for any } y \in \mathbb{B}(x,r)
+\]
+As \(r \to 0\) we can write
+\begin{align*}
+|\psi(r)| 
+&= r^{1-d} \left| \int_{\partial \mathbb{B}(x,r)} [u(y) - u(x) + u(x)] \, d\sigma_{x,r}(y) \right| \notag \\
+&\leq r^{1-d} \int_{\partial \mathbb{B}(x,r)} |u(y) - u(x)| \, d\sigma_{x,r}(y) 
++ |u(x)| \int_{\partial \mathbb{B}(x,r)} d\sigma_{x,r}(y) \notag \\
+&= r^{1-d} \left( \int_{\partial \mathbb{B}(x,r)} |u(y) - u(x)| \, d\sigma_{x,r}(y) 
++ |u(x)| \, \sigma_{x,r}(\partial \mathbb{B}(x,r)) \right) \notag \\
+&\leq r^{1-d} \left( \varepsilon + |u(x)| \right) \, \sigma_{x,r}(\partial \mathbb{B}(x,r)).
+\end{align*}
+\noindent As \(\varepsilon \to 0\)
+\[
+\psi(r)= r^{1-d} \sigma_{x,r}(\mathbb{B}(x,r)) u(x)
+\]
+From which the equality in (3) follows from the definition of \(\psi(r)\).
+
+
+\end{proof}
+\begin{remark}[{\cite[Remark 3.4]{PeresMortersBook}}]
+A twice continuously differentiable function \(u : U \to \mathbb{R}\) is called subharmonic if and only if for any \(\mathbb{B}(x,r) \subset \mathbb{R}^d\) the following inequality holds
+\[
+u(x) \leq \frac{\int_{\mathbb{B}(x,r)} u(y)dy}{\mathscr{L}(\mathbb{B}(x,r))}
+.\]
+\end{remark}
+\noindent Now we discuss a key property of harmonic and subharmonic functions that is maximum principle .
+\begin{theorem}\label{maximum}
+[{\cite[Theorem 3.5]{PeresMortersBook}}]
+\textbf{Maximum Principle :} Suppose \(U \subset \mathbb{R}^d\) is an open connected set and \(u : U \to \mathbb{R}\) is a subharmonic function defined. Then 
+\begin{enumerate}
+  \item If \(u\) attains maximum in \(U\) then \(u\) is a constant function .
+ \item If \(u\) is continuous on \(\bar{U}\) and \(U\) is bounded then
+ \[
+ max_{x \in \bar{U}} u(x) =  max_{x \in \partial{U}} u(x)
+. \]  
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Define \(V =  \{x \in U : u(x)  = M\} \)  where M is the maximum. From the construction it is clear that \(V\) is relatively closed in \(U\). Now consider any such \(x \in V\) . Then for that \(x\) there exist a ball \( \mathbb{B}(x,r) \subset U\) as \(U \) is open. Using mean value theorem for subharmonic function we get \\
+\[
+M=u(x) \leq \frac{\int_{\mathbb{B}(x,r)} u(y)dy}{\mathscr{L}(\mathbb{B}(x,r))} \leq M
+\]
+Thus \( \forall\ y \in \mathbb{B}(x,r)\ u(y)=M\). Thus by continuity \(\mathbb{B}(x,r) \subset V\) . So \(V \) is also open. Again previously we had \(V\) is relatively closed in \(U\). Together this two implies that \(U=V\). So \(u\) is constant in \(U\).
+\noindent Given that \(u\) is continuous in \(\bar{U}\) and it is closed and bounded . Then using continuity property and the previous statement of this theorem the maximum should be attained on \(\partial{U}\).
+\end{proof}
+\begin{remark}[{\cite[Remark 3.6]{PeresMortersBook}}]
+If \(u\) is harmonic then the above theorem can be made for for \(u\) as well as \(-u\). In that case the maximum will just be replaced by the minimum.
+\end{remark}
+\begin{corollary}\label{unique}[{\cite[Corollary 3.7]{PeresMortersBook}}]
+Suppose \( u_1,u_2 : \mathbb{R}^d \to \mathbb{R}\) harmonic functions on a bounded domain \(U \subset \mathbb{R}^d\) and continuous on it's closure \(\bar{U}\). If \(u_1,u_2\) agrees on \(\partial{U}\) then they are identical .
+\end{corollary}
+\begin{proof}
+By Theorem \ref{maximum} applied to \(u_1 -u_2\) we get 
+\[
+max_{x\in \bar{U}}{\{u_1(x)-u_2(x)\}} = max_{x\in \partial{U}}{\{u_1(x)-u_2(x)\}} = 0 
+\]
+Hence \(u_1(x) \leq u_2(x) \forall x \in \bar{U}\) . Applying the same for \(u_2-u_1\) we get the inequality \(u_2(x) \leq u_1(x) \forall x \in \bar{U}\) which  follows the inequality \(u_1(x) = u_2(x) \forall x \in \bar{U}\).
+\end{proof}
+\noindent Now after discussing all this properties of harmonic functions we proceed towards discussing the relation between harmonic functions and Brownian motion.
+\begin{theorem}\label{locally-bounded-harmonic-function}[{\cite[Theorem 3.8]{PeresMortersBook}}]
+Suppose \( U \) is a domain, and let \( \{B(t): t > 0\} \) be a Brownian motion started at \( x \in U \). Define the stopping time
+\[
+\tau = \tau(\partial U) := \inf\{t > 0 : B(t) \in \partial U\}
+\]
+as the first hitting time of the boundary \( \partial U\). Let \( \varphi: \partial U \to \mathbb{R} \) be a measurable function such that the function \( u: U \to \mathbb{R} \), defined by
+\[
+u(x) = \mathbb{E}_x \left[ \varphi(B(\tau)) \, \mathbf{1}_{\{\tau < \infty\}} \right], \quad \text{for every } x \in U,
+\]
+is locally bounded. Then \( u \) is a harmonic function.
+
+\end{theorem}
+\begin{remark}[{\cite[Theorem 2.16]{PeresMortersBook}}]
+\textbf{Strong Markov Property :} 
+For every almost surely finite stopping time \( T \),  
+the process  
+\[
+\{ B(T + t) - B(T) : t > 0 \}
+\]  
+is a standard Brownian motion independent of \( \mathcal{F}^{+}(T) \).\\
+where \( \mathcal{F}^{+}(T) = \bigcap_{s > t} \sigma(B(t) : 0 \leq t \leq s)\).
+
+\end{remark}
+\begin{proof}
+The proof is followed from the strong markov property and mean value theorem of harmonic functions . For any ball \(\mathbb{B}(x,r) \subset U\) let \(
+\tilde{\tau} = \inf\{t > 0 : B(t) \notin \mathbb{B}(x, \delta)\}
+\). Then by strong markov property we have ,
+
+\[
+u(x) = \mathbb{E}_x \left[ \varphi(B(\tau)) \, \mathbf{1}_{\{\tau < \infty\}} \right]
+\]
+
+\[
+= \mathbb{E}_x \left[ \mathbb{E}_{B(\tilde{\tau})} \left[ \psi(B(\tau)) \, \mathbf{1}_{\{\tau < \infty\}} \middle| \mathcal{F}^+(\tilde{\tau}) \right] \right]
+\]
+As after fixing the filtration the starting point of the Brownian motion is shifting at \(B(\tilde{\tau})\) and becoming independent of the filtretion by the strong markov property.
+
+\[ u(x)
+= \mathbb{E}_x \left[ u(B(\tilde{\tau})) \right]
+= \int_{\partial \mathbb{B}(x,\delta)} u(y) \, \nu_{x,\delta}(dy) \quad 
+\]
+where \(\nu_{x,\delta}\) denotes the uniform distribution over \(\partial{\mathbb{B}(x,r)}\). Given u is locally bounded and we have shownthat it also satisfies the mean value property. So u is harmonic .
+
+
+
+\end{proof}
+\begin{definition}[{\cite[Definitio 3.9]{PeresMortersBook}}]
+Suppose \(U \subset \mathbb{R}^d \) and \(\partial{U}\) be it's boundary . Suppose \(\varphi : \partial{U} \to \mathbb{R}\) is continuous function on it's boundary. A continuous function \(v : \bar{U} \to \mathbb{R}\) is a solution to this \textbf{Dirichilet\ Problem } with boundary value \(\varphi\) if it is harmonic on \(U\) and \(v(x)=\varphi(x)\) for \(x \in \partial{U}\).
+\end{definition}
+\begin{remark}
+Note that it is not always necessary that there will always exist a solution to a Dirichlet problem. However for some sufficiently nice domain \(U\) the solution exists.
+\end{remark}
+\begin{definition}
+[{\cite[Definition 3.10]{PeresMortersBook}}]
+Let \( U \subset \mathbb{R}^d \) be a domain. We say that \( U \) satisfies the \emph{Poincaré cone condition} at a boundary point \( x \in \partial U \) if there exists a cone \( V \) with vertex at \( x \), opening angle \( \alpha > 0 \), and height \( h > 0 \), such that
+\[
+V \cap \mathbb{B}(x, h) \subset U^c,
+\]
+where \( \mathbb{B}(x, h) \) denotes the open ball of radius \( h \) centered at \( x \), and \( U^c \) is the complement of \( U \).
+\end{definition}
+\noindent Let us discuss some property of this type of domains which have solution to the dirichlet problem. Note that for any set \(A \subset \mathbb{R}^d\) the first hitting time of the set \(A\) by the Brownian motion is given by \(\tau(A) = inf\{ t \geq 0 : B(t) \in A\}\).
+\begin{lemma}[{\cite[Lemma 3.11]{PeresMortersBook}}]
+Let \( 0 < \alpha < 2\pi \), and let \( C_0(\alpha) \subset \mathbb{R}^d \) be a cone with vertex at the origin and opening angle \( \alpha \). Define
+\[
+a = \sup_{x \in cl \mathbb{B}(0, \frac{1}{2})} \mathbb{P}_x\left( \tau(\partial \mathbb{B}(0,1)) < \tau(C_0(\alpha)) \right),
+\]
+Then \( a < 1 \). Moreover, for any positive integer \( k \) and any \( h_0 > 0 \), we have
+\[
+\mathbb{P}_x\left( \tau(\partial \mathbb{B}(z, h_0)) < \tau(C_z(\alpha)) \right) \leq a^k,
+\]
+for all \( x, z \in \mathbb{R}^d \) satisfying \( |x - z| < 2^{-k} h_0 \), where \( C_z(\alpha) \) denotes the cone with vertex at \( z \) and opening angle \( \alpha \).
+
+\end{lemma}
+\begin{remark}
+Suppose \(f :[0,1] \to \mathbb{R}\) is a continuous function with \(f(0)=0\). Then for a standard brownian motion \(\{B(t) : t \geq 0\}\) and \(\epsilon > 0\) we have 
+\[
+P\{sup_{0 \leq t \leq 1} |B(t)-f(t)| < \epsilon\} >0
+\].
+\end{remark}
+\begin{proof}
+First we show that \(a < 1\).
+
+\noindent Using fatou's lemma we can claim 
+\[
+sup
+\]
+
+\end{proof}
+\begin{theorem}\label{Dirichlet-problem}
+[{\cite[Theorem 3.12]{PeresMortersBook}}]
+\textbf{Dirichlet Problem :} Suppose \( U \subset \mathbb{R}^d \) is a bounded domain such that every boundary point satisfies the Poincaré cone condition, and suppose \( \varphi \) is a continuous function on \( \partial U \). Let 
+\[
+\tau(\partial U) = \inf\{ t > 0 : B(t) \in \partial U \}
+\]
+be an almost surely finite stopping time. Then the function
+\[
+u(x) = \mathbb{E}_x[\varphi(B(\tau(\partial U)))], \quad \text{for all } x \in \overline{U},
+\]
+is the unique continuous function harmonic on \( U \) with \( u(x) = \varphi(x) \) for all \( x \in \partial U \).
+
+\end{theorem}
+\begin{proof}
+Let us do the proof step by step. First we show that the expectation exists.
+Given \(\tau(\partial U)\) is finite almost surely. So \(B(\tau(\partial(U)\) is also finite. As \(\bar{U}\) is bounded and \(\varphi\) is continuous so \(\varphi(B(\tau(\partial U)))\) is also finite almost surely. So the expectation is also finite and exists.
+\noindent As finite so bounded and this implies locally bounded then by Theorem \ref{locally-bounded-harmonic-function} \(u\) is a harmonic function.
+\noindent Now we are to proof that \(u\) is continuous on \(\bar{U}\). Fix \( z \in \partial U \), then there is a cone \( C_z(\alpha) \)
+based at \( z \) with angle \( \alpha > 0 \) with \( C_z(\alpha) \cap \mathbb{B}(z, h') \subset U^c \). By Lemma 3.11, 
+for any positive integer \( k \) and \( h' > 0 \), we have
+\[
+\mathbb{P}_x \left\{ \tau(\partial \mathcal{B}(z, h')) < \tau(C_z(\alpha)) \right\} \leq a^k
+\]
+for all \( x \) with \( |x - z| < 2^{-k} h' \). Given \( \varepsilon > 0 \), there is a \( 0 < \delta \leq h' \) such that 
+\( |\varphi(y) - \varphi(z)| < \varepsilon \) for all \( y \in \partial U \) with \( |y - z| < \delta \). 
+For all \( x \in \overline{U} \) with \( |z - x| < 2^{-k} \delta \),
+Now \[
+|u(x)-u(z)| = | \mathbb{E}_x[\varphi(B(\tau(\partial U)))]-\varphi(z)|
+\text{ (As it is given on boundary \(u\) and \(\varphi\) matches )} 
+\]
+so,
+\[
+|u(x)-u(z)| \leq \mathbb{E}_x[|\varphi(B(\tau(\partial U)))-\varphi(z)|] 
+\]
+Now define an event \[A=\left\{ \tau(\partial \mathbb{B}(z, h')) < \tau(C_z(\alpha)) \right\}\]
+We can write ,
+\[
+\mathbb{E}|\varphi(B(\tau(\partial U)))-\varphi(z)|=
+\mathbb{E}_x[|\varphi(B(\tau(\partial U)))-\varphi(z)|I_A + |\varphi(B(\tau(\partial U)))-\varphi(z)|I_{A^c}] \leq 
+\]
+\[
+2 \| \varphi \|_{\infty} \, \mathbb{P}_x \left\{ \tau(\partial \mathbb{B}(z, \delta)) < \tau(C_z(\alpha)) \right\} + 
+\varepsilon \, \mathbb{P}_x \left\{ \tau(\partial U) < \tau(\partial \mathbb{B}(z, \delta)) \right\} 
+\leq 2 \| \varphi \|_{\infty} a^k + \varepsilon.
+\]
+where \(||\varphi \|_{\infty}\) is the norm supremum .
+\[
+|\varphi(B(\tau(\partial U)))-\varphi(z)| \leq |\varphi(B(\tau(\partial U)))|+|\varphi(z)| \leq 2||\varphi \|_{\infty}
+\]
+which implies \(u \) is continuous on \(\bar{U}\). Which follows from Corollary \ref{unique} the uniqueness of \(u\).
+
+
+
+\end{proof}
+\noindent Note that if poincare cone condition hold at every boundary point of the domain then one can simulate the solution of the Dirichlet problem just by knowing the \(\varphi\) function.
+\begin{example}
+[{\cite[Example 3.15]{PeresMortersBook}}]    
+Consider a solution \( v : \mathbb{B}(0,1) \to \mathbb{R} \) of the Dirichlet problem on the planar disc \( \mathbb{B}(0,1) \), with boundary condition \( \varphi : \partial \mathbb{B}(0,1) \to \mathbb{R} \). Let 
+\[
+U = \{ x \in \mathbb{R}^2 : 0 < |x| < 1 \}
+\]
+denote the punctured disc. We claim that the function
+\[
+u(x) = \mathbb{E}_x \left[ \varphi\left( B(\tau(\partial U)) \right) \right]
+\]
+does not solve the Dirichlet problem on \( U \) with boundary condition \( \varphi : \partial \mathbb{B}(0,1) \cup \{0\} \to \mathbb{R} \), assuming \( \varphi(0) \neq v(0) \). 
+
+\noindent The reason is that planar Brownian motion almost surely does not hit isolated points. Hence the first hitting time \( \tau \) of the boundary \( \partial U = \partial \mathcal{B}(0,1) \cup \{0\} \) almost surely coincides with the first hitting time of \( \partial \mathcal{B}(0,1) \). Therefore, by Theorem \ref{Dirichlet-problem}
+\[
+u(0) = \mathbb{E}_0 \left[ \varphi\left( B(\tau) \right) \right] = v(0) \neq \varphi(0).
+\]
+This demonstrates that \( u \) fails to satisfy the prescribed boundary condition at the origin.
+\end{example}
+\noindent Now we apply the techniques we developed to prove a classical theorem of harmonic function that is the Liouville's theorem by probabilistic means. This uses the \textbf{Reflection principle} for higher dimensional Brownian motion.
+\begin{theorem}
+[{\cite[Theorem 3.16]{PeresMortersBook}}]
+All bounded harmonic function in \(\mathbb{R}^d\) is constant.
+\end{theorem}
+\begin{proof}
+Let \(u : \mathbb{R}^d \to [-M,M]\) be a harmonic function. Let \(x\) and \(y\) be two points in the domain. Let \(H\) be the hyperplane reflection in which takes point \(x\) to \(y\). Let \(\{B(t) : t \geq 0\}\) be the brownian motion started at \(x\) and let  \(\{\bar{B}(t) : t \geq 0\}\) be the reflected brownian motion at time point \(\tau = inf \{t : B(t) \in H\}\). 
+\begin{equation}\label{reflection-principle}
+\{B(t) : t \geq \tau(H)\} \overset{d}{=} \{\overline{B}(t) : t \geq \tau(H)\}. 
+\end{equation}
+
+Since \( u \) is harmonic, we know that \( \mathbb{E}_x[u(B(t))] = u(x) \). Splitting the expectation based on whether \( t < \tau(H) \) or \( t \geq \tau(H) \), we obtain
+\[
+u(x) = \mathbb{E}_x\left[u(B(t)) {1}_{\{t < \tau(H)\}} \right] + \mathbb{E}_x\left[u(B(t)) {1}_{\{t \geq \tau(H)\}} \right].
+\]
+Thus we can write 
+
+\begin{align*}
+|u(x)-u(y)| 
+&= \Big| \mathbb{E}_x\left[u(B(t)) {1}_{\{t < \tau(H)\}} \right] 
++ \mathbb{E}_x\left[u(B(t)) {1}_{\{t \geq \tau(H)\}}\right] \\
+&\quad - \mathbb{E}_y\left[u(\bar{B}(t)) {1}_{\{t < \tau(H)\}} \right] 
+- \mathbb{E}_y\left[u(\bar{B}(t)) {1}_{\{t \geq \tau(H)\}} \right] \Big|
+\end{align*}
+\noindent As from equation (\ref{reflection-principle}) we get that \(\{B(t) : t \geq \tau(H)\}\) started at \(x\) is in distribution same as \(\{\bar{B}(t) : t \geq \tau(H)\}\) starting at \(y\). So we get 
+\[
+\mathbb{E}_x\left[u(B(t)) {1}_{\{t \geq \tau(H)\}}\right] = \mathbb{E}_y\left[u(\bar{B}(t)) {1}_{\{t \geq \tau(H)\}} \right] 
+\]
+\begin{align*}
+|u(x) - u(y)| 
+&= \left| \mathbb{E}\left[u(B(t)) {1}_{\{t < \tau(H)\}}\right] 
+- \mathbb{E}\left[u(\bar{B}(t)) {1}_{\{t < \tau(H)\}}\right] \right| \\
+&\leq 2M \mathbb{P}\{t < \tau(H)\} \longrightarrow 0 \quad \text{as } t \to \infty.
+\end{align*}
+Therefore, \( u(x) = u(y) \). Since \( x \) and \( y \) were arbitrary, it follows that \( u \) must be constant.
+
+
+\end{proof}
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
