@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage{graphicx}    % Required for inserting images
+\usepackage{amsmath}     % For better math formatting
+\usepackage{amssymb}     % For additional math symbols
+\usepackage{mathrsfs}    % For script letters like \mathscr
+\usepackage{amsfonts} % For symbols like \mathbb
+\usepackage{amsthm}
+
+\title{Chapter 2.2.1}
+\author{Anusua Paul}
+\date{June, 2025}
+
+\numberwithin{equation}{section}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{example}[theorem]{Example}
+
+
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\pp}{\mathbb{P}}
+
+\begin{document}
+
+\maketitle
+
+\section{Recurrence and Transience of Brownian Motion}
+
+Suppose 
+\[
+B_t(\omega) : (\Omega, \F, \pp) \times [0, \infty) \to (\mathbb{R}^d, \mathscr{B}(\mathbb{R}^d))
+\]
+is a Brownian motion in dimension \( d \). It is called \textbf{transient} if
+\[
+\lim_{t \to \infty} |B_t(\omega)| = \infty \quad \text{almost surely},
+\]
+that is,
+\[
+\pp\left( \left\{ \omega \in \Omega : \lim_{t \to \infty} |B_t(\omega)| < \infty \right\} \right) = 0.
+\]
+In particular, for fixed \( \omega \in \Omega \), i.e., for a fixed path, we often write \( B_t(\omega) = B(t) \).
+Note that  \(
+\left\{ \omega :\lim_{t \to \infty} |B_t(\omega)| = \infty \right\}
+\) is a \textit{tail event} (as Brownian motion has independence increament property so this event belongs to tail sigma algebra), and hence by the zero-one law for tail events, it happens either with probability 0 or with probability 1. Thus, for fixed \( d \), the Brownian motion is either transient or recurrent.
+\begin{definition}
+Define \( \mathscr{G}(t) = \sigma(B(s) : s \geq t) \). The \textbf{tail \(\sigma\)-algebra} of Brownian motion  is defined as
+\[
+\mathscr{T} = \bigcap_{t \geq 0} \mathscr{G}(t),
+\]
+and consists of all tail events.
+\end{definition}
+\begin{theorem}[{\cite[Theorem 2.9]{PeresMortersBook}}]
+\textbf{Zero-One Law for Tail Events : } Let \( x \in \mathbb{R}^d \) and let \( A \in \mathscr{T} \) be a tail event. Then,
+\[
+\mathbb{P}_x(A) \in \{0, 1\}.
+\]
+\end{theorem}
+\noindent In this section, we are interested in determining for which dimensions \( d \) Brownian motion is transient, and for which dimensions it is recurrent. This question is closely related to the exit probabilities of a Brownian motion from an annulus.
+Consider the annulus
+\[
+A = \left\{ y \in \mathbb{R}^d : r < |y| < R \right\}, \quad \text{for } 0 < r < R < \infty.
+\]
+Suppose a Brownian motion starts at a point \( x \in A \). We are interested in the probability that the motion hits \( \partial \mathbb{B}(0, r) \) before it hits \( \partial \mathbb{B}(0, R) \). 
+Now, as \( R \to \infty \) and \( t \to \infty \), this event becomes equivalent to the event 
+\[
+\left\{\omega : \lim_{t \to \infty} |B_t(\omega)| = \infty \right\},
+\]
+which is precisely the event of transience.
+The answer to this exit probability is given in terms of a harmonic function defined on the annulus, and is therefore closely related to the \textbf{Dirichlet Problem}. \\
+To find an explicit solution \( u : \overline{A} \to \mathbb{R} \) of the Dirichlet problem on an annulus, we first assume that \( u \) is \textbf{spherically symmetric}, i.e., the value of the function depends only on the norm distance \( |x| \) from the origin and not on the angular position. Since the annulus has a symmetric structure, this is a reasonable assumption.
+If \( u \) is spherically symmetric, then there exists a function \( \psi : [r, R] \to \mathbb{R} \) such that \(u(x) = \psi(|x|^2).\) \\
+We now compute the derivatives of \( u \) in terms of \( \psi \). Letting \( y = |x|^2 \geq 0 \) , we have:
+\[
+\partial_{i} u(x) = \frac{d}{dx_i} \psi(|x|^2) = \psi'(|x|^2) \cdot 2x_i,
+\]
+and
+\[
+\partial_{ii}^2 u(x) = \frac{d^2}{dx_i^2} \psi(|x|^2) = \psi''(|x|^2) \cdot 4x_i^2 + 2\psi'(|x|^2).
+\]
+Therefore, the Laplacian of \( u \) is
+\[
+\Delta u(x) = \sum_{i=1}^d \left( 4x_i^2 \psi''(y) + 2\psi'(y) \right).
+\]
+Now, using the identity \( \sum_{i=1}^d x_i^2 = |x|^2 = y \), we get
+\[
+\Delta u(x) = 4y \psi''(y) + 2d \psi'(y).
+\]
+Setting \( \Delta u = 0 \) for harmonicity, we obtain:
+\[
+4y \psi''(y) + 2d \psi'(y) = 0.
+\]
+Dividing through by 2, we get:
+\begin{align*}
+    2y \, \psi''(y) + d \, \psi'(y) &= 0 \\
+    \text{and hence , } \psi''(y) + \frac{d}{2y} \, \psi'(y) &= 0
+\end{align*}
+
+Here the integrating factor is given by, 
+
+\[
+\text{IF} = \exp\left( \int \frac{d}{2y} \, dy \right) = y^{d/2}
+\]
+
+Now multiplying with IF we get:
+
+\[
+\psi''(y) \, y^{d/2} + \frac{d}{2} \, y^{\frac{d}{2}-1} \, \psi'(y) = 0
+\]
+
+\[
+\text{and hence , }\frac{d}{dy} \left( \psi'(y) \, y^{d/2} \right) = 0
+\]
+
+\[
+\text{so} \quad \psi'(y) \, y^{d/2} = \text{const}
+\]
+
+\[
+\text{and hence , } \psi'(y) = \text{const} \cdot y^{-d/2}
+\]
+\noindent Thus, \( \Delta u = 0 \) holds for \( |x| > 0 \) as well.
+Hence, the general solution \( u(x) \) is given by :
+\begin{equation}\label{all-harmonic}
+u(x) = 
+\begin{cases}
+k_1|x| & \text{if } d = 1, \\
+k_2\log |x| & \text{if } d = 2, \\
+k_d|x|^{2 - d} & \text{if } d \geq 3.
+\end{cases}
+\end{equation}
+where \(k_d \) are constants. Note that for \(d \leq 2\) u(x) is increasing in x and for \(d \geq 3\) onwards it is decreasing in x.\\
+Write \( u(r) \) for the value of \( u(x) \) for all \( x \in \partial \mathbb{B}(0, r) \). As \( u(\cdot) \) is spherically symmetric and only depends on the norm distance of \( x \), this is a reasonable notation. Define the stopping times
+\[
+T_r = \tau(\partial \mathbb{B}(0, r)) = \inf \{ t > 0 : |B(t)| = r \} \quad \text{for } r > 0,
+\]
+and \( T = T_r \wedge T_R \) denotes  the first exit time from the annulus \( A \). Here, assume that \( T \) is finite almost surely, that is,
+\[
+\mathbb{P}\left( \left\{ \omega \in \Omega : T(\omega) = \infty \right\} \right) = 0.
+\]
+From equation \eqref{all-harmonic}, \( u(x) \) is continuous on the annulus, and since every boundary point satisfies the Poincaré cone condition, by Dirichlet Problem , we have
+\[
+u(x) = \mathbb{E}_x \left[ u(B(T)) \right] = u(r) \, \mathbb{P}_x(T_r < T_R) + u(R)\left(1 - \mathbb{P}_x(T_r < T_R)\right).
+\]
+From this we can solve for the exit probability
+\[
+\mathbb{P}_x(T_r < T_R) = \frac{u(R) - u(x)}{u(R) - u(r)},
+\]
+and this gives the explicit solution to the exit problem.
+\begin{theorem}\label{exit-annulus}
+[{\cite[Theorem 3.18]{PeresMortersBook}}]
+Let \( \{B(t) : t \geq 0\} \) is a Brownian motion in dimension \( d \geq 1 \) started at \( x \in A := \{y \in \mathbb{R}^d : r \leq |y| \leq R \} \), inside an annulus \( A \) with radii \( 0 < r < R < \infty \). Then,
+\begin{equation}
+\mathbb{P}_x(T_r < T_R) =
+\begin{cases}
+\displaystyle \frac{R - |x|}{R - r} & \text{if } d = 1, \\[10pt]
+\displaystyle \frac{\log R - \log |x|}{\log R - \log r} & \text{if } d = 2, \\[10pt]
+\displaystyle \frac{R^{2 - d} - |x|^{2 - d}}{R^{2 - d} - r^{2 - d}} & \text{if } d \geq 3.
+\end{cases}
+\end{equation}
+
+\end{theorem}
+
+
+\begin{proof}
+The proof directly follows from equation (\ref{all-harmonic}).
+\end{proof}
+\noindent Letting \( R \uparrow \infty \) in Theorem \ref{exit-annulus} leads to the following corollary.
+
+\begin{corollary}[{\cite[Corollary 3.19]{PeresMortersBook}}]
+For any \( x \notin \mathbb{B}(0, r) \), we have
+\[
+\mathbb{P}_x(T_r < \infty) =
+\begin{cases}
+1 & \text{if } d \leq 2, \\[10pt]
+\displaystyle \left( \frac{r}{|x|} \right)^{d - 2} & \text{if } d \geq 3.
+\end{cases}
+\]
+\end{corollary}
+\begin{definition}
+Suppose 
+\[
+X_t(\omega) : (\Omega, \mathscr{F}, \mathbb{\mu}) \times [0, \infty) \to (\mathbb{R}^d, \mathscr{B}(\mathbb{R}^d))
+\] is a Markov process . For fixed \(\omega \in \Omega\) write \(X_t(\omega) = X(t)\) .
+\begin{itemize}
+    \item \textbf{Point recurrent} : if for every \( x \in \mathbb{R}^d \), almost surely, there exists a (random) sequence \( t_n \uparrow \infty \) such that \( X(t_n) = x \) for all \( n \in \mathbb{N} \).
+    
+    \item \textbf{Neighbourhood recurrent} : if for every \( x \in \mathbb{R}^d \) and \( \varepsilon > 0 \), almost surely, there exists a (random) sequence \( t_n \uparrow \infty \) such that \( X(t_n) \in B(x, \varepsilon) \) for all \( n \in \mathbb{N} \).
+    
+    \item \textbf{Transient} : if \( |X(t)| \to \infty \) almost surely as \( t \to \infty \).
+\end{itemize}
+\end{definition}
+\begin{theorem}[{\cite[Theorem 3.20]{PeresMortersBook}}]
+Brownian motion is
+\begin{itemize}
+    \item \textbf{point recurrent} in dimension \( d = 1 \),
+    \item \textbf{neighbourhood recurrent} but not point recurrent, in dimension \( d = 2 \),
+    \item \textbf{transient} in dimension \( d \geq 3 \).
+\end{itemize}
+\end{theorem}
+\begin{remark}[{\cite[Remark 3.21]{PeresMortersBook}}]
+\textit{Neighbourhood recurrence}, in particular, implies that the path of a planar Brownian motion (running for an infinite amount of time) is dense in the plane. It means that for any \(x \in R^2\) and for any \( \epsilon > 0\) the Brownian motion will enter in \(B(x,\epsilon)\) infinitely often almost surely.
+\end{remark}
+\begin{lemma}
+\textbf{Paley-Zygmund Inequality : } [{\cite[Lemma 3.23]{PeresMortersBook}}]
+For any nonnegative random variable \( X \) with \( \mathbb{E}[X^2] < \infty \),
+\[
+\mathbb{P}(X > 0) \geq \frac{(\mathbb{E}[X])^2}{\mathbb{E}[X^2]}.
+\]
+\end{lemma}
+\begin{proof}
+The Cauchy–Schwarz inequality gives
+\[
+\mathbb{E}[X] = \mathbb{E}[X \cdot \mathbf{1}_{\{X > 0\}}] \leq \left(\mathbb{E}[X^2]\right)^{1/2} \left(\mathbb{P}(X > 0)\right)^{1/2},
+\]
+and the required inequality follows immediately by squaring both sides:
+\[
+\mathbb{P}(X > 0) \geq \frac{(\mathbb{E}[X])^2}{\mathbb{E}[X^2]}.
+\]
+\end{proof}
+\begin{lemma}[{\cite[Lemma 3.24]{PeresMortersBook}}]
+Suppose \( E_1, E_2, \ldots \) are events such that
+\[
+\sum_{n=1}^\infty \mathbb{P}(E_n) = \infty
+\quad \text{and} \quad
+\liminf_{k \to \infty} \frac{\sum_{m=1}^k \sum_{n=1}^k \mathbb{P}(E_n \cap E_m)}{\left( \sum_{n=1}^k \mathbb{P}(E_n) \right)^2} < \infty.
+\]
+Then, with positive probability, infinitely many of the events take place, that is,
+\[
+\mathbb{P} \left( \limsup_{n \to \infty} E_n \right) > 0.
+\]
+\end{lemma}
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+
+\end{document}
