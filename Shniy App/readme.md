@@ -16,4 +16,6 @@ btn_hover  <- pal[6]
 accent1    <- pal[3]
 accent2    <- pal[4]
 
+# At the end attach
+shinyApp(ui, server)
 
